@@ -23,6 +23,10 @@ public static class DependencyInjection
 
         services.AddSingleton<IChatClient>(chatClient);
 
+        services
+           .AddOptionsWithValidateOnStart<AiOptions, AiOptionsValidator>()
+           .Bind(configuration.GetSection(AiOptions.SectionName));
+
         return services;
     }
 }

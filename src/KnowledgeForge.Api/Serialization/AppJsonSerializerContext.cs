@@ -1,10 +1,10 @@
-﻿using KnowledgeForge.Api.Features.Chat;
+﻿using KnowledgeForge.Api.Features.Conversations.Contracts;
 using System.Text.Json.Serialization;
 
 namespace KnowledgeForge.Api.Serialization;
 
-[JsonSerializable(typeof(ChatRequest))]
-[JsonSerializable(typeof(ChatResponse))]
+[JsonSerializable(typeof(CreateConversationRequest))]
+[JsonSerializable(typeof(CreateConversationResponse))]
 public partial class AppJsonSerializerContext : JsonSerializerContext
 {
 }

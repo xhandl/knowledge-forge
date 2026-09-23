@@ -1,4 +1,4 @@
-using KnowledgeForge.Api.Features.Chat;
+using KnowledgeForge.Api.Features.Conversations;
 using KnowledgeForge.Api.Infrastructure.AI;
 using KnowledgeForge.Api.Infrastructure.Persistence;
 using KnowledgeForge.Api.Serialization;
@@ -13,8 +13,9 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 builder.Services.AddOpenApi();
 
 builder.Services.AddAi(builder.Configuration);
-builder.Services.AddChat(builder.Configuration);
 builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddConversations();
+builder.Services.AddSingleton(TimeProvider.System);
 
 var app = builder.Build();
 
@@ -23,6 +24,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.MapChatEndpoints();
+app.MapGet("/", () => Results.Redirect("openapi/v1.json"));
+app.MapConversationEndpoints();
 
 app.Run();
